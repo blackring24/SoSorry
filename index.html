@@ -2,96 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>💗 sorry 💗</title>
+  <title>💌 sorry 💌</title>
+
   <style>
     body {
-      background: linear-gradient(135deg, #ffd6e8, #ffeef5);
-      font-family: "Comic Sans MS", "Poppins", cursive;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
-    }
-
-    .note {
-      width: 260px;
-      height: 180px;
-      background: #ffb6d5;
-      border-radius: 16px;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe0ec, #fff5f9);
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: "Poppins", cursive;
+      overflow: hidden;
+    }
+
+    /* Closed note */
+    .note {
+      width: 220px;
+      height: 150px;
+      background: #ff9fc9;
+      border-radius: 14px;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      transition: transform 0.3s;
-    }
-
-    .note:hover {
-      transform: scale(1.05);
-    }
-
-    .note span {
+      position: relative;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      animation: float 3s ease-in-out infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
       font-size: 18px;
-      color: #fff;
     }
 
+    .note::before {
+      content: "💌";
+      position: absolute;
+      top: -20px;
+      font-size: 32px;
+      animation: bounce 1.5s infinite;
+    }
+
+    /* Opened letter */
     .letter {
       display: none;
-      background: #fff;
       width: 300px;
       padding: 24px;
+      background: white;
       border-radius: 20px;
       text-align: center;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      animation: pop 0.4s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+      animation: open 0.5s ease forwards;
     }
 
     .letter h2 {
-      color: #ff69b4;
+      color: #ff6fae;
       margin-bottom: 10px;
     }
 
     .letter p {
-      color: #444;
       font-size: 15px;
-      line-height: 1.5;
+      color: #444;
+      line-height: 1.6;
     }
 
-    .heart {
+    .emoji {
       font-size: 24px;
-      margin-top: 10px;
+      margin-top: 12px;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes open {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="note" onclick="openLetter()">
-    <span>💌 click me 💌</span>
+  <div class="note" onclick="openNote()">
+    click me 🥺
   </div>
 
   <div class="letter" id="letter">
-    <h2>hey you 🥺</h2>
+    <h2>hey 💗</h2>
     <p>
-      I’m really sorry for calling you<br>
-      and then saying nothing 😭📞<br><br>
-      That was dumb and awkward<br>
-      and you deserved better.
+      sorry for calling you<br>
+      and then going silent 😭📞<br><br>
+      that was awkward<br>
+      and i promise i’ll do better next time
     </p>
-    <div class="heart">🫶💗🧸</div>
+    <div class="emoji">🫶💗🧸</div>
   </div>
 
   <script>
-    function openLetter() {
-      document.querySelector(".note").style.display = "none";
-      document.getElementById("letter").style.display = "block";
+    function openNote() {
+      document.querySelector('.note').style.display = 'none';
+      document.getElementById('letter').style.display = 'block';
     }
   </script>
 
 </body>
 </html>
+
