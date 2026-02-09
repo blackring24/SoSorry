@@ -8,12 +8,28 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffe0ec, #fff5f9);
+      /* more colourful background */
+      background: linear-gradient(135deg,
+        #ffd1e8,
+        #ffe6b3,
+        #c9f7ff,
+        #d8c7ff,
+        #ffeef8
+      );
+      background-size: 300% 300%;
+      animation: bg 10s ease infinite;
+
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: "Poppins", cursive;
       overflow: hidden;
+    }
+
+    @keyframes bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Closed note */
@@ -26,11 +42,21 @@
       position: relative;
       box-shadow: 0 12px 30px rgba(0,0,0,0.15);
       animation: float 3s ease-in-out infinite;
+
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
       font-size: 18px;
+      user-select: none;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* floating text inside note */
+    .note span {
+      display: inline-block;
+      animation: tinyFloat 1.8s ease-in-out infinite;
     }
 
     .note::before {
@@ -64,11 +90,21 @@
       line-height: 1.6;
     }
 
+    /* mixed emojis + float */
     .emoji {
       font-size: 24px;
       margin-top: 12px;
       animation: pulse 1.5s infinite;
     }
+    .emoji span {
+      display: inline-block;
+      animation: tinyFloat 2.2s ease-in-out infinite;
+    }
+    .emoji span:nth-child(2) { animation-delay: .2s; }
+    .emoji span:nth-child(3) { animation-delay: .4s; }
+    .emoji span:nth-child(4) { animation-delay: .6s; }
+    .emoji span:nth-child(5) { animation-delay: .8s; }
+    .emoji span:nth-child(6) { animation-delay: 1s; }
 
     /* Animations */
     @keyframes float {
@@ -82,19 +118,18 @@
     }
 
     @keyframes open {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
     }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes tinyFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
   </style>
 </head>
@@ -102,18 +137,26 @@
 <body>
 
   <div class="note" onclick="openNote()">
-    click me 🥺
+    <span>click me 🥺💗</span>
   </div>
 
   <div class="letter" id="letter">
-    <h2>hey 💗</h2>
+    <h2>i’m sorry Anjali 💗</h2>
     <p>
       sorry for calling you<br>
       and then going silent 😭📞<br><br>
       that was awkward<br>
       and i promise i’ll do better next time
     </p>
-    <div class="emoji">🫶💗🧸</div>
+
+    <div class="emoji" aria-label="cute emojis">
+      <span>🥺</span>
+      <span>💗</span>
+      <span>🐶</span>
+      <span>🥺</span>
+      <span>💞</span>
+      <span>🫶</span>
+    </div>
   </div>
 
   <script>
@@ -125,4 +168,5 @@
 
 </body>
 </html>
+
 
