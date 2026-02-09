@@ -8,7 +8,8 @@
     body {
       margin: 0;
       height: 100vh;
-      /* more colourful background */
+
+      /* colourful animated gradient */
       background: linear-gradient(135deg,
         #ffd1e8,
         #ffe6b3,
@@ -24,12 +25,62 @@
       align-items: center;
       font-family: "Poppins", cursive;
       overflow: hidden;
+      position: relative;
     }
 
     @keyframes bg {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* --- Floating background layer --- */
+    .bg-float {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-float .bubble {
+      position: absolute;
+      opacity: 0.22;
+      filter: blur(0.2px);
+      animation-name: driftUp, sway;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+    }
+
+    /* Different sizes */
+    .bubble.s1 { font-size: 18px; }
+    .bubble.s2 { font-size: 22px; }
+    .bubble.s3 { font-size: 28px; }
+    .bubble.s4 { font-size: 34px; }
+
+    /* Make text (name) look softer in background */
+    .bubble.name {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      opacity: 0.14;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      filter: blur(0.1px);
+    }
+
+    @keyframes driftUp {
+      from { transform: translateY(120vh); }
+      to   { transform: translateY(-30vh); }
+    }
+
+    @keyframes sway {
+      0%, 100% { margin-left: 0px; }
+      50% { margin-left: 18px; }
+    }
+
+    /* --- Foreground content --- */
+    .wrap {
+      position: relative;
+      z-index: 2;
     }
 
     /* Closed note */
@@ -90,22 +141,6 @@
       line-height: 1.6;
     }
 
-    /* mixed emojis + float */
-    .emoji {
-      font-size: 24px;
-      margin-top: 12px;
-      animation: pulse 1.5s infinite;
-    }
-    .emoji span {
-      display: inline-block;
-      animation: tinyFloat 2.2s ease-in-out infinite;
-    }
-    .emoji span:nth-child(2) { animation-delay: .2s; }
-    .emoji span:nth-child(3) { animation-delay: .4s; }
-    .emoji span:nth-child(4) { animation-delay: .6s; }
-    .emoji span:nth-child(5) { animation-delay: .8s; }
-    .emoji span:nth-child(6) { animation-delay: 1s; }
-
     /* Animations */
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -122,11 +157,6 @@
       to   { transform: scale(1);   opacity: 1; }
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
     @keyframes tinyFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -136,26 +166,36 @@
 
 <body>
 
-  <div class="note" onclick="openNote()">
-    <span>click me 🥺💗</span>
+  <!-- floating background emojis + name (behind everything) -->
+  <div class="bg-float" aria-hidden="true">
+    <!-- emojis -->
+    <div class="bubble s2" style="left: 10%; animation-duration: 12s, 3.2s; animation-delay: -2s, 0s;">🥺</div>
+    <div class="bubble s3" style="left: 22%; animation-duration: 15s, 4.0s; animation-delay: -6s, -1s;">💗</div>
+    <div class="bubble s1" style="left: 35%; animation-duration: 11s, 2.8s; animation-delay: -4s, -0.5s;">🐶</div>
+    <div class="bubble s4" style="left: 48%; animation-duration: 18s, 4.4s; animation-delay: -10s, -2s;">🥺</div>
+    <div class="bubble s2" style="left: 60%; animation-duration: 13s, 3.6s; animation-delay: -7s, -1.2s;">💞</div>
+    <div class="bubble s3" style="left: 72%; animation-duration: 16s, 4.2s; animation-delay: -9s, -2.2s;">🫶</div>
+    <div class="bubble s1" style="left: 84%; animation-duration: 12.5s, 3.0s; animation-delay: -5s, -1.6s;">🥺</div>
+
+    <!-- floating name behind -->
+    <div class="bubble name s3" style="left: 18%; animation-duration: 20s, 5.2s; animation-delay: -12s, -1s;">i’m sorry Anjali</div>
+    <div class="bubble name s2" style="left: 55%; animation-duration: 24s, 6.0s; animation-delay: -18s, -2s;">i’m sorry Anjali</div>
+    <div class="bubble name s4" style="left: 78%; animation-duration: 22s, 5.6s; animation-delay: -8s, -0.8s;">i’m sorry Anjali</div>
   </div>
 
-  <div class="letter" id="letter">
-    <h2>i’m sorry Anjali 💗</h2>
-    <p>
-      sorry for calling you<br>
-      and then going silent 😭📞<br><br>
-      that was awkward<br>
-      and i promise i’ll do better next time
-    </p>
+  <div class="wrap">
+    <div class="note" onclick="openNote()">
+      <span>click me 🥺💗</span>
+    </div>
 
-    <div class="emoji" aria-label="cute emojis">
-      <span>🥺</span>
-      <span>💗</span>
-      <span>🐶</span>
-      <span>🥺</span>
-      <span>💞</span>
-      <span>🫶</span>
+    <div class="letter" id="letter">
+      <h2>i’m sorry Anjali 💗</h2>
+      <p>
+        sorry for calling you<br>
+        and then going silent 😭📞<br><br>
+        i know that could’ve been annoying,<br>
+        i’ll do better next time for sure
+      </p>
     </div>
   </div>
 
