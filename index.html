@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>💗 sorry 💗</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+      font-family: "Comic Sans MS", "Poppins", cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .note {
+      width: 260px;
+      height: 180px;
+      background: #ffb6d5;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+
+    .note:hover {
+      transform: scale(1.05);
+    }
+
+    .note span {
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .letter {
+      display: none;
+      background: #fff;
+      width: 300px;
+      padding: 24px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .letter h2 {
+      color: #ff69b4;
+      margin-bottom: 10px;
+    }
+
+    .letter p {
+      color: #444;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .heart {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="note" onclick="openLetter()">
+    <span>💌 click me 💌</span>
+  </div>
+
+  <div class="letter" id="letter">
+    <h2>hey you 🥺</h2>
+    <p>
+      I’m really sorry for calling you<br>
+      and then saying nothing 😭📞<br><br>
+      That was dumb and awkward<br>
+      and you deserved better.
+    </p>
+    <div class="heart">🫶💗🧸</div>
+  </div>
+
+  <script>
+    function openLetter() {
+      document.querySelector(".note").style.display = "none";
+      document.getElementById("letter").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
